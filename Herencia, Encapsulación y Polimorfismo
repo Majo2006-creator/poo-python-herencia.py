@@ -1,0 +1,65 @@
+# Programa que demuestra los principios de la Programación Orientada a Objetos:
+# Herencia, Encapsulación y Polimorfismo
+
+class Empleado:
+    """
+    Clase base Empleado
+    Demuestra encapsulación y define métodos generales
+    """
+
+    def __init__(self, nombre, salario):
+        # Atributos privados (encapsulación)
+        self.__nombre = nombre
+        self.__salario = salario
+
+    # Métodos getter para acceder a los atributos privados
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_salario(self):
+        return self.__salario
+
+    # Método que puede ser sobrescrito (polimorfismo)
+    def calcular_bono(self):
+        return self.__salario * 0.10
+
+    def mostrar_info(self):
+        print(f"Empleado: {self.__nombre}")
+        print(f"Salario: ${self.__salario}")
+
+
+class EmpleadoDocente(Empleado):
+    """
+    Clase derivada EmpleadoDocente
+    Demuestra herencia y polimorfismo
+    """
+
+    def __init__(self, nombre, salario, horas_clase):
+        # Llamada al constructor de la clase padre
+        super().__init__(nombre, salario)
+        self.horas_clase = horas_clase
+
+    # Sobrescritura del método (polimorfismo)
+    def calcular_bono(self):
+        return self.get_salario() * 0.20
+
+    def mostrar_info(self):
+        super().mostrar_info()
+        print(f"Horas de clase: {self.horas_clase}")
+
+
+# -------------------------------
+# Creación de objetos (instancias)
+# -------------------------------
+
+empleado1 = Empleado("Carlos Torres", 800)
+docente1 = EmpleadoDocente("Ana Pérez", 1000, 20)
+
+# Uso de métodos
+print("=== Empleado General ===")
+empleado1.mostrar_info()
+print(f"Bono: ${empleado1.calcular_bono()}\n")
+
+print("=== Empleado Docente ===")
+docente1.mostrar_info()
+print(f"Bono: ${docente1.calcular_bono()}")
